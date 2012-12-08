@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="styles/main.css">
+        <script src="scripts/vendor/modernizr.min.js"></script>
+    </head>
+    <body>
+        <figure>
+            <img src="images/SFneighborhood_map.gif">
+            <figcaption>SF Neighborhoods</figcaption>
+        </figure>
+
+        <form class="form-horizontal">
+
+            <div class="control-group">
+                <label class="control-label" for="bedrooms">Bedrooms</label>
+                <div class="controls">
+                    <select name="bedrooms" id="bedrooms">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="bathrooms">Bathrooms</label>
+                <div class="controls">
+                    <select name="bathrooms" id="bathrooms">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <label>Yard</label>
+                    <label class="radio" >
+                        <input type="radio" name="yard" value="1">
+                        Yes
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="yard" value="0">
+                        No
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <label>Garage</label>
+                    <label class="radio">
+                        Yes
+                        <input type="radio" name="garage" value="1">
+                    </label>
+                    <label class="radio">
+                        No
+                        <input type="radio" name="garage" value="0">
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <label for="squarefeet">Min. Square Feet</label>
+                    <select name="squarefeet" id="squarefeet">
+                        <option value="500">500</option>
+                        <option value="600">600</option>
+                        <option value="700">700</option>
+                        <option value="800">800</option>
+                        <option value="900">900</option>
+                        <option value="1000">1000</option>
+                        <option value="1100">1100</option>
+                        <option value="1200">1200</option>
+                        <option value="1300">1300</option>
+                        <option value="1400">1400</option>
+                        <option value="1500">1500</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <label for="price">Max. Price</label>
+                    <select name="price" id="price">
+                        <option value="600000">$600,000</option>
+                        <option value="650000">$650,000</option>
+                        <option value="700000">$700,000</option>
+                        <option value="750000">$750,000</option>
+                        <option value="800000">$800,000</option>
+                        <option value="850000">$850,000</option>
+                        <option value="900000">$900,000</option>
+                        <option value="950000">$950,000</option>
+                        <option value="1000000">$1,000,000</option>
+                        <option value="1200000">$1,200,000</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <label for="neighborhoods">Neighborhoods</label>
+                    <select name="neighborhoods" id="neighborhoods" multiple="multiple" size="14">
+                        <optgroup label="SF District 1">
+                            <option value="1014">Central Richmond</option>
+                            <option value="1015">Inner Richmond</option>
+                            <option value="1016">Jordan Lake/Laurel H</option>
+                            <option value="1017">Lake Street</option>
+                            <option value="1020">Lone Mountain</option>
+                            <option value="1018">Outer Richmond</option>
+                            <option value="1019">Sea Cliff</option>
+                        </optgroup>
+                        <optgroup label="SF District 2">
+                            <option value="1025">Central Sunset</option>
+                            <option value="1021">Golden Gate Heights</option>
+                            <option value="1027">Inner Parkside</option>
+                            <option value="1026">Inner Sunset</option>
+                            <option value="1022">Outer Parkside</option>
+                            <option value="1023">Outer Sunset</option>
+                            <option value="1024">Parkside</option>
+                        </optgroup>
+                        <optgroup label="SF District 3">
+                            <option value="1035">Ingleside</option>
+                            <option value="1034">Ingleside Heights</option>
+                            <option value="1028">Lake Shore</option>
+                            <option value="1032">Lakeside</option>
+                            <option value="1029">Merced Heights</option>
+                            <option value="1033">Merced Manor</option>
+                            <option value="1036">Oceanview</option>
+                            <option value="1030">Pine Lake Park</option>
+                            <option value="1031">Stonestown</option>
+                        </optgroup>
+                        <optgroup label="SF District 4">
+                            <option value="1037">Balboa Terrace</option>
+                            <option value="1038">Diamond Heights</option>
+                            <option value="1039">Forest Hill</option>
+                            <option value="1045">Forest Hill Extension</option>
+                            <option value="1040">Forest Knolls</option>
+                            <option value="1041">Ingleside Terrace</option>
+                            <option value="1042">Midtown Terrace</option>
+                            <option value="1044">Miraloma Park</option>
+                            <option value="1047">Monterey Heights</option>
+                            <option value="1048">Mount Davidson Manor</option>
+                            <option value="1046">Sherwood Forest</option>
+                            <option value="1043">St Francis Wood</option>
+                            <option value="1051">Sunnyside</option>
+                            <option value="1052">West Portal</option>
+                            <option value="1049">Westwood Highlands</option>
+                            <option value="1050">Westwood Park</option>
+                        </optgroup>
+                        <optgroup label="SF District 5">
+                            <option value="1058">Buena Vista/Ashbury Heights</option>
+                            <option value="1060">Clarendon Heights</option>
+                            <option value="1059">Corona Heights</option>
+                            <option value="1061">Duboce Triangle</option>
+                            <option value="1062">Eureka valley/Dolore Heights</option>
+                            <option value="1053">Glen Park</option>
+                            <option value="1054">Haight Ashbury</option>
+                            <option value="1063">Mission Dolores</option>
+                            <option value="1055">Noe Valley</option>
+                            <option value="1056">Twin Peaks</option>
+                        </optgroup>
+                        <optgroup label="SF District 6">
+                            <option value="1068">Alamo Square</option>
+                            <option value="1064">Anza Vista</option>
+                            <option value="1065">Hayes Valley</option>
+                            <option value="1066">Lower Pacific Height</option>
+                            <option value="1069">North Panhandle</option>
+                            <option value="1067">Western Addition</option>
+                        </optgroup>
+                        <optgroup label="SF District 7">
+                            <option value="1073">Cow Hollow</option>
+                            <option value="1070">Marina</option>
+                            <option value="1071">Pacific Heights</option>
+                            <option value="1072">Presidio Heights</option>
+                        </optgroup>
+                        <optgroup label="SF District 8">
+                            <option value="1074">Downtown</option>
+                            <option value="1075">Financial District/Barbary Coast</option>
+                            <option value="1076">Nob Hill</option>
+                            <option value="1077">North Beach</option>
+                            <option value="1081">North Waterfront</option>
+                            <option value="1078">Russian Hill</option>
+                            <option value="1080">Telegraph Hill</option>
+                            <option value="1082">Tenderloin</option>
+                            <option value="1079">Van Ness/Civic Center</option>
+                        </optgroup>
+                        <optgroup label="SF District 9">
+                            <option value="1083">Bernal Heights</option>
+                            <option value="1089">Central Waterfront/Dogpatch</option>
+                            <option value="1084">Inner Mission</option>
+                            <option value="1085">Mission Bay</option>
+                            <option value="1086">Potrero Hill</option>
+                            <option value="1088">South Beach</option>
+                            <option value="1087">South of Market</option>
+                            <option value="4437">Yerba Buena</option>
+                        </optgroup>
+                        <optgroup label="SF District 10">
+                            <option value="1090">Bayview</option>
+                            <option value="1099">Bayview Heights</option>
+                            <option value="4438">Candlestick Point</option>
+                            <option value="1091">Crocker Amazon</option>
+                            <option value="1092">Excelsior</option>
+                            <option value="1098">Hunters Point</option>
+                            <option value="4439">Little Hollywood</option>
+                            <option value="1097">Mission Terrace</option>
+                            <option value="1093">Outer Mission</option>
+                            <option value="1095">Portola</option>
+                            <option value="1096">Silver Terrace</option>
+                            <option value="1094">Visitacion Valley</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="components/0jquery.min.js"><\/script>')</script>
+
+   </body>
+</html>
