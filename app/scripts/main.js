@@ -1,62 +1,67 @@
 $(document).ready(function() {
-
     var getElValueAsNumber = function(selector) {
         var value = $(selector).val();
         return value || 0;
     };
 
-    Parse.initialize("8De6SQMWtbOWrok19a0JA5I7SANT6FQP5a85WEy6", "bWAJd39x8c63Lv8xuKcafgu4TrbAqRqIr3Z1XayZ");
+    var showValues = function(results) {
+        var bedroomsSelector = "option[value='" + results.get("bedrooms") + "']",
+            bathroomsSelector = "option[value='" + results.get("bathrooms") + "']",
+            yardSelector = "input[type='radio'][name='yard'][value='" + results.get("yard") + "']",
+            garageSelector = "input[type='radio'][name='garage'][value='" + results.get("garage") + "']",
+            squarefeetSelector = "option[value='" + results.get("squarefeet") + "']",
+            priceSelector = "option[value='" + results.get("price") + "']",
 
+            neighborhoodsOptions = $("#neighborhoods").find("option"),
+            neighborhoodsOptionsLength = neighborhoodsOptions.length,
+            neighborhoods = results.get("neighborhoods"),
+            option,
+            optionValue;
+
+        housePreferences = results;
+        $("#bedrooms").find(bedroomsSelector).attr("selected", "selected");
+        $("#bathrooms").find(bathroomsSelector).attr("selected", "selected");
+        $(yardSelector).attr("checked", true);
+        $(garageSelector).attr("checked", true);
+        $("#squarefeet").find(squarefeetSelector).attr("selected", "selected");
+        $("#price").find(priceSelector).attr("selected", "selected");
+
+        for (var i = 0; i < neighborhoodsOptionsLength; i++) {
+            option = neighborhoodsOptions[i];
+            optionValue = $(option).attr("value");
+            if (neighborhoods.indexOf(optionValue) > -1) {
+                $(option).attr("selected", "selected");
+            }
+        }
+        loadQueryDeferred.resolve();
+     };
+
+    var addEventHandlers = function() {
+        // selects
+        $("select").on("change", function() {
+            var $select = $(this),
+                id = $select.attr("id"),
+                value = $select.val();
+
+            housePreferences.save(id, value);
+        });
+        // radios
+    };
+
+     Parse.initialize("8De6SQMWtbOWrok19a0JA5I7SANT6FQP5a85WEy6", "bWAJd39x8c63Lv8xuKcafgu4TrbAqRqIr3Z1XayZ");
+
+    // init class
     var HousePreferences = Parse.Object.extend({
-        className: "HousePreferences"
+            className: "HousePreferences"
+        }),
+        housePreferencesQuery = new Parse.Query(HousePreferences),
+        housePreferences,
+        loadQueryDeferred = $.Deferred();
+
+    housePreferencesQuery.get("xqDFn4ZkLt", {
+        success: showValues
     });
-    var housePreferencesQuery = new Parse.Query(HousePreferences);
-    housePreferencesQuery.get("nz8Iez26QO", {
-        success: function(results) {
-            console.log(results);
-            
-            var bedroomsSelector = "option[value='" + results.get("bedrooms") + "']";
-            $("#bedrooms").find(bedroomsSelector).attr("selected", "selected");
 
-            var bathroomsSelector = "option[value='" + results.get("bathrooms") + "']";
-            $("#bathrooms").find(bathroomsSelector).attr("selected", "selected");
-
-            var yardSelector = "input[type='radio'][name='yard'][value='" + results.get("yard") + "']";
-            $(yardSelector).attr("checked", true);
-
-            var garageSelector = "input[type='radio'][name='garage'][value='" + results.get("garage") + "']";
-            $(garageSelector).attr("checked", true);
-
-            var squarefeetSelector = "option[value='" + results.get("squarefeet") + "']";
-            $("#squarefeet").find(squarefeetSelector).attr("selected", "selected");
-
-            var priceSelector = "option[value='" + results.get("price") + "']";
-            $("#price").find(priceSelector).attr("selected", "selected");
-
-            // TO DO: neighborhoods
-         }
-    });
-/*
-    var housePreferences = new HousePreferences();
-
-    var bedrooms = getElValueAsNumber("#bedrooms");
-    var bathrooms = getElValueAsNumber("#bathrooms");
-    var yard = getElValueAsNumber("input[name=\"yard\"]:checked");
-    var garage = getElValueAsNumber("input[name=\"garage\"]:checked");
-    var squarefeet = getElValueAsNumber("#squarefeet");
-    var price = getElValueAsNumber("#price");
-    var neighborhoods = getElValueAsNumber("#neighborhoods");
-
-    housePreferences.set("bedrooms", bedrooms);
-    housePreferences.set("bathrooms", bathrooms);
-    housePreferences.set("yard", yard);
-    housePreferences.set("garage", garage);
-    housePreferences.set("squarefeet", squarefeet);
-    housePreferences.set("price", price);
-    housePreferences.set("neighborhoods", neighborhoods);
-    housePreferences.save();
-
-    console.log(housePreferences);
-   */
+    loadQueryDeferred.done(addEventHandlers);
 });
 

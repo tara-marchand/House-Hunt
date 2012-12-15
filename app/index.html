@@ -16,9 +16,10 @@
         <script src="scripts/vendor/modernizr.min.js"></script>
     </head>
     <body>
-        <figure>
-            <img src="images/SFneighborhood_map.gif">
-            <figcaption>SF Neighborhoods</figcaption>
+        <figure><img src="images/sfar-mls-map.gif" usemap="#Map">
+          <map name="Map">
+            <area shape="poly" coords="361,370,456,363,456,400,452,399,454,422,448,440,396,443,390,436,389,446,367,419,366,410,353,415,345,412,351,408,350,402,355,396" href="#">
+          </map>
         </figure>
 
         <form class="form-horizontal">
@@ -27,6 +28,7 @@
                 <label class="control-label" for="bedrooms">Bedrooms</label>
                 <div class="controls">
                     <select name="bedrooms" id="bedrooms">
+                        <option value="0">Bedrooms</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -38,6 +40,7 @@
                 <label class="control-label" for="bathrooms">Bathrooms</label>
                 <div class="controls">
                     <select name="bathrooms" id="bathrooms">
+                        <option value="0">Bathrooms</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -77,6 +80,7 @@
                 <div class="controls">
                     <label for="squarefeet">Min. Square Feet</label>
                     <select name="squarefeet" id="squarefeet">
+                        <option value="0">Min. Square Feet</option>
                         <option value="500">500</option>
                         <option value="600">600</option>
                         <option value="700">700</option>
@@ -96,6 +100,7 @@
                 <div class="controls">
                     <label for="price">Max. Price</label>
                     <select name="price" id="price">
+                        <option value="0">Max. Price</option>
                         <option value="600000">$600,000</option>
                         <option value="650000">$650,000</option>
                         <option value="700000">$700,000</option>
@@ -114,6 +119,7 @@
                 <div class="controls">
                     <label for="neighborhoods">Neighborhoods</label>
                     <select name="neighborhoods" id="neighborhoods" multiple="multiple" size="14">
+                        <option value="0">Neighborhoods</option>
                         <optgroup label="SF District 1">
                             <option value="1014">Central Richmond</option>
                             <option value="1015">Inner Richmond</option>
