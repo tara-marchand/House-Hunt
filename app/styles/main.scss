@@ -1,3 +1,14 @@
 @import "compass_twitter_bootstrap";
 
+figure {
+    height: 724px;
+    width: 800px;
+}
 
+.canvas-map {
+    position : absolute;
+    top : 0;
+    left : 0;
+    width : 800px;
+    height : 724px;
+}

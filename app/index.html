@@ -16,250 +16,257 @@
         <script src="scripts/vendor/modernizr.min.js"></script>
     </head>
     <body>
-        <figure>5<img src="images/sfar-mls-map.gif" usemap="#Map">
-          <map name="Map">
-            <area shape="poly" coords="361,370,457,363,457,400,453,399,455,422,449,440,396,443,391,436,390,444,368,419,367,411,354,413,346,412,352,408,351,402,356,396" href="#">
-            <area shape="poly" coords="390,436,395,443,453,440,429,479,380,505,380,492,360,493,358,492,343,492,346,484,339,479,343,469,369,461,381,463,389,446" href="#">
-            <area shape="poly" coords="380,504,412,497,430,502,449,502,466,497,483,497,508,485,524,483,518,451,531,428,540,397,532,396,521,405,453,406,454,423,448,441,454,440,429,479" href="#">
-            <area shape="poly" coords="361,370,366,357,358,354,350,346,348,339,358,330,369,330,376,329,383,324,391,324,426,293,428,346,460,345,461,363" href="#">
-            <area shape="poly" coords="358,464,369,461,382,463,391,444,368,420,368,410,358,413,346,411,341,414,335,411,330,416,320,416,316,418,322,428,330,435,339,437,341,442,343,447,359,455" href="#">
-            <area shape="poly" coords="343,489,336,489,332,486,325,488,321,490,308,489,301,477,302,471,293,467,287,461,279,461,281,456,276,455,277,450,279,449,291,441,304,426,315,418,330,436,338,437,342,447,358,454,358,463,343,469,339,478,345,484" href="#">
-            <area shape="poly" coords="276,486,267,476,268,457,271,454,277,454,282,456,280,460,288,461,295,468,302,471,302,474,299,476,291,475,280,475,274,467,275,475,278,479,276,486" href="#">
-            <area shape="poly" coords="280,503,290,501,304,501,307,494,308,489,301,478,301,473,297,476,279,475,273,468,273,474,277,478,275,486,279,493" href="#">
-            <area shape="poly" coords="280,448,257,450,249,454,218,483,217,490,248,491,253,498,260,494,260,483,257,480,258,477,266,478,268,458,269,454,276,455" href="#">
-            <area shape="poly" coords="279,503,279,493,267,476,258,477,257,481,261,482,260,494,253,498,256,500,255,504,263,508" href="#">
-            <area shape="poly" coords="272,540,271,512,275,505,280,503,289,501,305,501,305,514,307,513,306,549" href="#">
-            <area shape="poly" coords="271,540,260,535,257,535,248,530,240,526,237,521,245,510,248,511,248,501,253,497,256,500,255,505,263,508,275,504,271,511" href="#">
-            <area shape="poly" coords="218,490,217,503,227,508,235,514,238,522,244,511,249,510,248,501,253,498,248,490" href="#">
-            <area shape="poly" coords="307,550,308,517,305,515,305,499,309,490,323,490,332,487,336,490,343,490,345,492,352,493,357,493,379,493,379,505,362,513,340,533,331,550" href="#">
-            <area shape="poly" coords="261,536,261,580,298,580,318,594,325,577,326,568,331,551,306,550" href="#">
-            <area shape="poly" coords="217,503,234,513,240,525,262,536,261,558,212,557" href="#">
-            <area shape="poly" coords="212,558,261,558,261,581,210,580" href="#">
-            <area shape="poly" coords="280,448,291,440,305,424,315,418,305,417,297,413,288,411,279,411,260,430,269,436" href="#">
-            <area shape="poly" coords="345,411,346,401,337,393,330,393,324,399,321,396,326,388,326,383,336,374,332,371,330,360,334,359,336,361,334,356,316,357,314,354,310,357,306,353,302,362,302,370,298,377,298,384,294,386,284,382,273,381,270,384,283,404,279,411,291,411,305,417,315,418,319,415,329,416,335,410,340,413" href="#">
-            <area shape="poly" coords="345,412,352,408,352,402,356,396,361,369,366,357,358,355,350,346,345,345,342,342,335,351,336,361,332,359,330,361,331,371,336,374,325,383,326,388,321,395,324,399,330,393,336,392,346,401" href="#">
-            <area shape="poly" coords="335,356,316,357,313,353,310,357,306,353,314,347,315,340,330,339,331,332,342,332,342,342,335,350" href="#">
-            <area shape="poly" coords="454,406,521,405,531,396,538,396,542,390,541,357,528,345,525,334,521,286,490,282,455,276,459,345,461,345,461,364,456,364,457,399,453,401" href="#">
-            <area shape="poly" coords="314,346,314,333,297,335,289,317,278,341,266,338,260,335,261,366,259,370,270,385,274,381,284,382,294,386,298,384,297,376,302,370,302,361,306,353" href="#">
-            <area shape="poly" coords="279,447,260,429,239,430,239,432,224,432,225,466,204,466,204,483,218,483,249,454,257,450" href="#">
-            <area shape="poly" coords="237,430,241,429,260,429,279,410,283,403,274,390,264,377,252,378,253,388,252,395,256,397,257,401,251,401,249,405,248,414,238,415,237,424" href="#">
-          </map>
-    </figure>
+        <div id="container">
+            <figure>
+                <img src="images/sfar-mls-map.gif" width="800" height="724" usemap="#map" class="canvas-map">
+                <map name="map" id="map">
+                    <div id="areas">
+                        <area shape="poly" coords="361,370,457,363,457,400,453,399,455,422,449,440,396,443,391,436,390,444,368,419,367,411,354,413,346,412,352,408,351,402,356,396" href="#">
+                        <area shape="poly" coords="390,436,395,443,453,440,429,479,380,505,380,492,360,493,358,492,343,492,346,484,339,479,343,469,369,461,381,463,389,446" href="#">
+                        <area shape="poly" coords="380,504,412,497,430,502,449,502,466,497,483,497,508,485,524,483,518,451,531,428,540,397,532,396,521,405,453,406,454,423,448,441,454,440,429,479" href="#">
+                        <area shape="poly" coords="361,370,366,357,358,354,350,346,348,339,358,330,369,330,376,329,383,324,391,324,426,293,428,346,460,345,461,363" href="#">
+                        <area shape="poly" coords="358,464,369,461,382,463,391,444,368,420,368,410,358,413,346,411,341,414,335,411,330,416,320,416,316,418,322,428,330,435,339,437,341,442,343,447,359,455" href="#">
+                        <area shape="poly" coords="343,489,336,489,332,486,325,488,321,490,308,489,301,477,302,471,293,467,287,461,279,461,281,456,276,455,277,450,279,449,291,441,304,426,315,418,330,436,338,437,342,447,358,454,358,463,343,469,339,478,345,484" href="#">
+                        <area shape="poly" coords="276,486,267,476,268,457,271,454,277,454,282,456,280,460,288,461,295,468,302,471,302,474,299,476,291,475,280,475,274,467,275,475,278,479,276,486" href="#">
+                        <area shape="poly" coords="280,503,290,501,304,501,307,494,308,489,301,478,301,473,297,476,279,475,273,468,273,474,277,478,275,486,279,493" href="#">
+                        <area shape="poly" coords="280,448,257,450,249,454,218,483,217,490,248,491,253,498,260,494,260,483,257,480,258,477,266,478,268,458,269,454,276,455" href="#">
+                        <area shape="poly" coords="279,503,279,493,267,476,258,477,257,481,261,482,260,494,253,498,256,500,255,504,263,508" href="#">
+                        <area shape="poly" coords="272,540,271,512,275,505,280,503,289,501,305,501,305,514,307,513,306,549" href="#">
+                        <area shape="poly" coords="271,540,260,535,257,535,248,530,240,526,237,521,245,510,248,511,248,501,253,497,256,500,255,505,263,508,275,504,271,511" href="#">
+                        <area shape="poly" coords="218,490,217,503,227,508,235,514,238,522,244,511,249,510,248,501,253,498,248,490" href="#">
+                        <area shape="poly" coords="307,550,308,517,305,515,305,499,309,490,323,490,332,487,336,490,343,490,345,492,352,493,357,493,379,493,379,505,362,513,340,533,331,550" href="#">
+                        <area shape="poly" coords="261,536,261,580,298,580,318,594,325,577,326,568,331,551,306,550" href="#">
+                        <area shape="poly" coords="217,503,234,513,240,525,262,536,261,558,212,557" href="#">
+                        <area shape="poly" coords="212,558,261,558,261,581,210,580" href="#">
+                        <area shape="poly" coords="280,448,291,440,305,424,315,418,305,417,297,413,288,411,279,411,260,430,269,436" href="#">
+                        <area shape="poly" coords="345,411,346,401,337,393,330,393,324,399,321,396,326,388,326,383,336,374,332,371,330,360,334,359,336,361,334,356,316,357,314,354,310,357,306,353,302,362,302,370,298,377,298,384,294,386,284,382,273,381,270,384,283,404,279,411,291,411,305,417,315,418,319,415,329,416,335,410,340,413" href="#">
+                        <area shape="poly" coords="345,412,352,408,352,402,356,396,361,369,366,357,358,355,350,346,345,345,342,342,335,351,336,361,332,359,330,361,331,371,336,374,325,383,326,388,321,395,324,399,330,393,336,392,346,401" href="#">
+                        <area shape="poly" coords="335,356,316,357,313,353,310,357,306,353,314,347,315,340,330,339,331,332,342,332,342,342,335,350" href="#">
+                        <area shape="poly" coords="454,406,521,405,531,396,538,396,542,390,541,357,528,345,525,334,521,286,490,282,455,276,459,345,461,345,461,364,456,364,457,399,453,401" href="#">
+                        <area shape="poly" coords="314,346,314,333,297,335,289,317,278,341,266,338,260,335,261,366,259,370,270,385,274,381,284,382,294,386,298,384,297,376,302,370,302,361,306,353" href="#">
+                        <area shape="poly" coords="279,447,260,429,239,430,239,432,224,432,225,466,204,466,204,483,218,483,249,454,257,450" href="#">
+                        <area shape="poly" coords="237,430,241,429,260,429,279,410,283,403,274,390,264,377,252,378,253,388,252,395,256,397,257,401,251,401,249,405,248,414,238,415,237,424" href="#">
+                    </div>
+                </map>
+                <canvas class="canvas-map" id="canvas"></canvas>
+                <img src="images/transparent.gif" width="800" height="724" usemap="#map" class="canvas-map">
+            </figure>
 
-        <form class="form-horizontal">
+            <form class="form-horizontal">
 
-            <div class="control-group">
-                <label class="control-label" for="bedrooms">Bedrooms</label>
-                <div class="controls">
-                    <select name="bedrooms" id="bedrooms">
-                        <option value="0">Bedrooms</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
+                <div class="control-group">
+                    <label class="control-label" for="bedrooms">Bedrooms</label>
+                    <div class="controls">
+                        <select name="bedrooms" id="bedrooms">
+                            <option value="0">Bedrooms</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
                 </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="bathrooms">Bathrooms</label>
+                    <div class="controls">
+                        <select name="bathrooms" id="bathrooms">
+                            <option value="0">Bathrooms</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <label>Yard</label>
+                        <label class="radio" >
+                            <input type="radio" name="yard" value="1">
+                            Yes
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="yard" value="0">
+                            No
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <label>Garage</label>
+                        <label class="radio">
+                            Yes
+                            <input type="radio" name="garage" value="1">
+                        </label>
+                        <label class="radio">
+                            No
+                            <input type="radio" name="garage" value="0">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="squarefeet">Min. Square Feet</label>
+                        <select name="squarefeet" id="squarefeet">
+                            <option value="0">Min. Square Feet</option>
+                            <option value="500">500</option>
+                            <option value="600">600</option>
+                            <option value="700">700</option>
+                            <option value="800">800</option>
+                            <option value="900">900</option>
+                            <option value="1000">1000</option>
+                            <option value="1100">1100</option>
+                            <option value="1200">1200</option>
+                            <option value="1300">1300</option>
+                            <option value="1400">1400</option>
+                            <option value="1500">1500</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="price">Max. Price</label>
+                        <select name="price" id="price">
+                            <option value="0">Max. Price</option>
+                            <option value="600000">$600,000</option>
+                            <option value="650000">$650,000</option>
+                            <option value="700000">$700,000</option>
+                            <option value="750000">$750,000</option>
+                            <option value="800000">$800,000</option>
+                            <option value="850000">$850,000</option>
+                            <option value="900000">$900,000</option>
+                            <option value="950000">$950,000</option>
+                            <option value="1000000">$1,000,000</option>
+                            <option value="1200000">$1,200,000</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="neighborhoods">Neighborhoods</label>
+                        <select name="neighborhoods" id="neighborhoods" multiple="multiple" size="14">
+                            <option value="0">Neighborhoods</option>
+                            <optgroup label="SF District 1">
+                                <option value="1014">Central Richmond</option>
+                                <option value="1015">Inner Richmond</option>
+                                <option value="1016">Jordan Lake/Laurel H</option>
+                                <option value="1017">Lake Street</option>
+                                <option value="1020">Lone Mountain</option>
+                                <option value="1018">Outer Richmond</option>
+                                <option value="1019">Sea Cliff</option>
+                            </optgroup>
+                            <optgroup label="SF District 2">
+                                <option value="1025">Central Sunset</option>
+                                <option value="1021">Golden Gate Heights</option>
+                                <option value="1027">Inner Parkside</option>
+                                <option value="1026">Inner Sunset</option>
+                                <option value="1022">Outer Parkside</option>
+                                <option value="1023">Outer Sunset</option>
+                                <option value="1024">Parkside</option>
+                            </optgroup>
+                            <optgroup label="SF District 3">
+                                <option value="1035">Ingleside</option>
+                                <option value="1034">Ingleside Heights</option>
+                                <option value="1028">Lake Shore</option>
+                                <option value="1032">Lakeside</option>
+                                <option value="1029">Merced Heights</option>
+                                <option value="1033">Merced Manor</option>
+                                <option value="1036">Oceanview</option>
+                                <option value="1030">Pine Lake Park</option>
+                                <option value="1031">Stonestown</option>
+                            </optgroup>
+                            <optgroup label="SF District 4">
+                                <option value="1037">Balboa Terrace</option>
+                                <option value="1038">Diamond Heights</option>
+                                <option value="1039">Forest Hill</option>
+                                <option value="1045">Forest Hill Extension</option>
+                                <option value="1040">Forest Knolls</option>
+                                <option value="1041">Ingleside Terrace</option>
+                                <option value="1042">Midtown Terrace</option>
+                                <option value="1044">Miraloma Park</option>
+                                <option value="1047">Monterey Heights</option>
+                                <option value="1048">Mount Davidson Manor</option>
+                                <option value="1046">Sherwood Forest</option>
+                                <option value="1043">St Francis Wood</option>
+                                <option value="1051">Sunnyside</option>
+                                <option value="1052">West Portal</option>
+                                <option value="1049">Westwood Highlands</option>
+                                <option value="1050">Westwood Park</option>
+                            </optgroup>
+                            <optgroup label="SF District 5">
+                                <option value="1058">Buena Vista/Ashbury Heights</option>
+                                <option value="1060">Clarendon Heights</option>
+                                <option value="1059">Corona Heights</option>
+                                <option value="1061">Duboce Triangle</option>
+                                <option value="1062">Eureka valley/Dolore Heights</option>
+                                <option value="1053">Glen Park</option>
+                                <option value="1054">Haight Ashbury</option>
+                                <option value="1063">Mission Dolores</option>
+                                <option value="1055">Noe Valley</option>
+                                <option value="1056">Twin Peaks</option>
+                            </optgroup>
+                            <optgroup label="SF District 6">
+                                <option value="1068">Alamo Square</option>
+                                <option value="1064">Anza Vista</option>
+                                <option value="1065">Hayes Valley</option>
+                                <option value="1066">Lower Pacific Height</option>
+                                <option value="1069">North Panhandle</option>
+                                <option value="1067">Western Addition</option>
+                            </optgroup>
+                            <optgroup label="SF District 7">
+                                <option value="1073">Cow Hollow</option>
+                                <option value="1070">Marina</option>
+                                <option value="1071">Pacific Heights</option>
+                                <option value="1072">Presidio Heights</option>
+                            </optgroup>
+                            <optgroup label="SF District 8">
+                                <option value="1074">Downtown</option>
+                                <option value="1075">Financial District/Barbary Coast</option>
+                                <option value="1076">Nob Hill</option>
+                                <option value="1077">North Beach</option>
+                                <option value="1081">North Waterfront</option>
+                                <option value="1078">Russian Hill</option>
+                                <option value="1080">Telegraph Hill</option>
+                                <option value="1082">Tenderloin</option>
+                                <option value="1079">Van Ness/Civic Center</option>
+                            </optgroup>
+                            <optgroup label="SF District 9">
+                                <option value="1083">Bernal Heights</option>
+                                <option value="1089">Central Waterfront/Dogpatch</option>
+                                <option value="1084">Inner Mission</option>
+                                <option value="1085">Mission Bay</option>
+                                <option value="1086">Potrero Hill</option>
+                                <option value="1088">South Beach</option>
+                                <option value="1087">South of Market</option>
+                                <option value="4437">Yerba Buena</option>
+                            </optgroup>
+                            <optgroup label="SF District 10">
+                                <option value="1090">Bayview</option>
+                                <option value="1099">Bayview Heights</option>
+                                <option value="4438">Candlestick Point</option>
+                                <option value="1091">Crocker Amazon</option>
+                                <option value="1092">Excelsior</option>
+                                <option value="1098">Hunters Point</option>
+                                <option value="4439">Little Hollywood</option>
+                                <option value="1097">Mission Terrace</option>
+                                <option value="1093">Outer Mission</option>
+                                <option value="1095">Portola</option>
+                                <option value="1096">Silver Terrace</option>
+                                <option value="1094">Visitacion Valley</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </form>
             </div>
 
-            <div class="control-group">
-                <label class="control-label" for="bathrooms">Bathrooms</label>
-                <div class="controls">
-                    <select name="bathrooms" id="bathrooms">
-                        <option value="0">Bathrooms</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <div class="controls">
-                    <label>Yard</label>
-                    <label class="radio" >
-                        <input type="radio" name="yard" value="1">
-                        Yes
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="yard" value="0">
-                        No
-                    </label>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <div class="controls">
-                    <label>Garage</label>
-                    <label class="radio">
-                        Yes
-                        <input type="radio" name="garage" value="1">
-                    </label>
-                    <label class="radio">
-                        No
-                        <input type="radio" name="garage" value="0">
-                    </label>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <div class="controls">
-                    <label for="squarefeet">Min. Square Feet</label>
-                    <select name="squarefeet" id="squarefeet">
-                        <option value="0">Min. Square Feet</option>
-                        <option value="500">500</option>
-                        <option value="600">600</option>
-                        <option value="700">700</option>
-                        <option value="800">800</option>
-                        <option value="900">900</option>
-                        <option value="1000">1000</option>
-                        <option value="1100">1100</option>
-                        <option value="1200">1200</option>
-                        <option value="1300">1300</option>
-                        <option value="1400">1400</option>
-                        <option value="1500">1500</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <div class="controls">
-                    <label for="price">Max. Price</label>
-                    <select name="price" id="price">
-                        <option value="0">Max. Price</option>
-                        <option value="600000">$600,000</option>
-                        <option value="650000">$650,000</option>
-                        <option value="700000">$700,000</option>
-                        <option value="750000">$750,000</option>
-                        <option value="800000">$800,000</option>
-                        <option value="850000">$850,000</option>
-                        <option value="900000">$900,000</option>
-                        <option value="950000">$950,000</option>
-                        <option value="1000000">$1,000,000</option>
-                        <option value="1200000">$1,200,000</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <div class="controls">
-                    <label for="neighborhoods">Neighborhoods</label>
-                    <select name="neighborhoods" id="neighborhoods" multiple="multiple" size="14">
-                        <option value="0">Neighborhoods</option>
-                        <optgroup label="SF District 1">
-                            <option value="1014">Central Richmond</option>
-                            <option value="1015">Inner Richmond</option>
-                            <option value="1016">Jordan Lake/Laurel H</option>
-                            <option value="1017">Lake Street</option>
-                            <option value="1020">Lone Mountain</option>
-                            <option value="1018">Outer Richmond</option>
-                            <option value="1019">Sea Cliff</option>
-                        </optgroup>
-                        <optgroup label="SF District 2">
-                            <option value="1025">Central Sunset</option>
-                            <option value="1021">Golden Gate Heights</option>
-                            <option value="1027">Inner Parkside</option>
-                            <option value="1026">Inner Sunset</option>
-                            <option value="1022">Outer Parkside</option>
-                            <option value="1023">Outer Sunset</option>
-                            <option value="1024">Parkside</option>
-                        </optgroup>
-                        <optgroup label="SF District 3">
-                            <option value="1035">Ingleside</option>
-                            <option value="1034">Ingleside Heights</option>
-                            <option value="1028">Lake Shore</option>
-                            <option value="1032">Lakeside</option>
-                            <option value="1029">Merced Heights</option>
-                            <option value="1033">Merced Manor</option>
-                            <option value="1036">Oceanview</option>
-                            <option value="1030">Pine Lake Park</option>
-                            <option value="1031">Stonestown</option>
-                        </optgroup>
-                        <optgroup label="SF District 4">
-                            <option value="1037">Balboa Terrace</option>
-                            <option value="1038">Diamond Heights</option>
-                            <option value="1039">Forest Hill</option>
-                            <option value="1045">Forest Hill Extension</option>
-                            <option value="1040">Forest Knolls</option>
-                            <option value="1041">Ingleside Terrace</option>
-                            <option value="1042">Midtown Terrace</option>
-                            <option value="1044">Miraloma Park</option>
-                            <option value="1047">Monterey Heights</option>
-                            <option value="1048">Mount Davidson Manor</option>
-                            <option value="1046">Sherwood Forest</option>
-                            <option value="1043">St Francis Wood</option>
-                            <option value="1051">Sunnyside</option>
-                            <option value="1052">West Portal</option>
-                            <option value="1049">Westwood Highlands</option>
-                            <option value="1050">Westwood Park</option>
-                        </optgroup>
-                        <optgroup label="SF District 5">
-                            <option value="1058">Buena Vista/Ashbury Heights</option>
-                            <option value="1060">Clarendon Heights</option>
-                            <option value="1059">Corona Heights</option>
-                            <option value="1061">Duboce Triangle</option>
-                            <option value="1062">Eureka valley/Dolore Heights</option>
-                            <option value="1053">Glen Park</option>
-                            <option value="1054">Haight Ashbury</option>
-                            <option value="1063">Mission Dolores</option>
-                            <option value="1055">Noe Valley</option>
-                            <option value="1056">Twin Peaks</option>
-                        </optgroup>
-                        <optgroup label="SF District 6">
-                            <option value="1068">Alamo Square</option>
-                            <option value="1064">Anza Vista</option>
-                            <option value="1065">Hayes Valley</option>
-                            <option value="1066">Lower Pacific Height</option>
-                            <option value="1069">North Panhandle</option>
-                            <option value="1067">Western Addition</option>
-                        </optgroup>
-                        <optgroup label="SF District 7">
-                            <option value="1073">Cow Hollow</option>
-                            <option value="1070">Marina</option>
-                            <option value="1071">Pacific Heights</option>
-                            <option value="1072">Presidio Heights</option>
-                        </optgroup>
-                        <optgroup label="SF District 8">
-                            <option value="1074">Downtown</option>
-                            <option value="1075">Financial District/Barbary Coast</option>
-                            <option value="1076">Nob Hill</option>
-                            <option value="1077">North Beach</option>
-                            <option value="1081">North Waterfront</option>
-                            <option value="1078">Russian Hill</option>
-                            <option value="1080">Telegraph Hill</option>
-                            <option value="1082">Tenderloin</option>
-                            <option value="1079">Van Ness/Civic Center</option>
-                        </optgroup>
-                        <optgroup label="SF District 9">
-                            <option value="1083">Bernal Heights</option>
-                            <option value="1089">Central Waterfront/Dogpatch</option>
-                            <option value="1084">Inner Mission</option>
-                            <option value="1085">Mission Bay</option>
-                            <option value="1086">Potrero Hill</option>
-                            <option value="1088">South Beach</option>
-                            <option value="1087">South of Market</option>
-                            <option value="4437">Yerba Buena</option>
-                        </optgroup>
-                        <optgroup label="SF District 10">
-                            <option value="1090">Bayview</option>
-                            <option value="1099">Bayview Heights</option>
-                            <option value="4438">Candlestick Point</option>
-                            <option value="1091">Crocker Amazon</option>
-                            <option value="1092">Excelsior</option>
-                            <option value="1098">Hunters Point</option>
-                            <option value="4439">Little Hollywood</option>
-                            <option value="1097">Mission Terrace</option>
-                            <option value="1093">Outer Mission</option>
-                            <option value="1095">Portola</option>
-                            <option value="1096">Silver Terrace</option>
-                            <option value="1094">Visitacion Valley</option>
-                        </optgroup>
-                    </select>
-                </div>
-            </div>
-        </form>
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="components/jquery/jquery.min.js"><\/script>')</script>
-        <script src="http://www.parsecdn.com/js/parse-1.1.14.js"></script>
-        <script src="scripts/main.js"></script>
-   </body>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="components/jquery/jquery.min.js"><\/script>')</script>
+            <script src="http://www.parsecdn.com/js/parse-1.1.14.js"></script>
+            <script src="scripts/main.js"></script>
+       </body>
 </html>
