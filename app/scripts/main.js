@@ -22,6 +22,10 @@ var hh = (function() {
             housePreferences.save(id, value);
         });
         // radios
+        // areas
+        $("area").on("mouseenter", function() {
+            alert($(this).data("value"));
+        });
     };
 
     hh.init = function() {
