@@ -1,3 +1,16 @@
+/**
+ *
+ * Model: HousePreferences
+ * View: HousePreferencesView
+ *
+ * Model: Neighborhood
+ * View: NeighborhoodView
+ *
+ * Collection: AllNeighborhoods
+ * View: AllNeighborhoodsView
+ *
+ */
+
 $(document).ready(function() {
     "use strict";
     hh.init();
@@ -6,22 +19,102 @@ $(document).ready(function() {
 var hh = (function() {
     "use strict";
     var hh = {},
-        HousePreferences = null,
-        HousePreferencesView = null,
-        housePreferencesQuery = null,
-        housePreferences = null,
-        housePreferencesView = null;
+        housePrefsView = null;
+
+    hh.HousePreferences = Parse.Object.extend({
+        className: "HousePreferences"
+    });
+
+    hh.HousePreferencesView = Parse.View.extend({
+        model: null,
+
+        neighborhoodsSelect: null,
+        neighborhoodsCollection: null,
+
+        initialize: function() {
+           this.neighborhoodsSelect = new hh.SelectView({
+                el: "#neighborhoods"
+            });
+            this.neighborhoodsCollection = new hh.NeighborhoodsCollection();
+            var neighborhoodsOptions = this.neighborhoodsSelect.el.getElementsByTagName("option");
+            var neighborhoodsLength = neighborhoodsOptions.length;
+            var neighborhoodModel, neighborhoodOptionView;
+
+            for (var i = 0; i < neighborhoodsLength; i++) {
+                neighborhoodModel = new hh.NeighborhoodModel({
+                    id: neighborhoodsOptions[i].value
+                });
+                neighborhoodOptionView = new hh.OptionView({
+                    model: neighborhoodModel
+                });
+                this.neighborhoodsCollection.add(neighborhoodModel);
+            }
+
+           /*for (var i = 0; i < neighborhoodsOptionsLength; i++) {
+                option = neighborhoodsOptions[i];
+                optionValue = $(option).attr("value");
+                if (neighborhoods.indexOf(optionValue) > -1) {
+                    $(option).attr("selected", "selected");
+                }
+            }*/
+
+            this.render();
+        },
+        render: function() {
+            var selectedNeighborhoods = this.model.get("neighborhoods");
+            // http://stackoverflow.com/questions/6442689/backbone-js-how-do-i-filter-a-collection-of-objects-by-an-array-of-model-ids
+
+            _.each(this.neighborhoodsCollection.models.filter(function(neighborhood) {
+                return _.contains(selectedNeighborhoods, neighborhood.id);
+            }), function(model) {
+                model.set("selected", true);
+            });
+
+            var bedroomsSelector = "option[value='" + this.model.get("bedrooms") + "']",
+                bathroomsSelector = "option[value='" + this.model.get("bathrooms") + "']",
+                yardSelector = "input[type='radio'][name='yard'][value='" + this.model.get("yard") + "']",
+                garageSelector = "input[type='radio'][name='garage'][value='" + this.model.get("garage") + "']",
+                squarefeetSelector = "option[value='" + this.model.get("squarefeet") + "']",
+                priceSelector = "option[value='" + this.model.get("price") + "']";
+
+            $("#bedrooms").find(bedroomsSelector).attr("selected", "selected");
+            $("#bathrooms").find(bathroomsSelector).attr("selected", "selected");
+            $(yardSelector).attr("checked", true);
+            $(garageSelector).attr("checked", true);
+            $("#squarefeet").find(squarefeetSelector).attr("selected", "selected");
+            $("#price").find(priceSelector).attr("selected", "selected");
+
+          }
+    });
+
+   hh.NeighborhoodModel = Parse.Object.extend({
+        className: "Neighborhood",
+        selected: false
+    });
+
+    hh.NeighborhoodsCollection = Parse.Collection.extend({
+        model: hh.Neighborhood
+    });
+
+    hh.SelectView = Parse.View.extend({
+        model: null,
+        tagName: "select",
+       //saveNeighborhoods: function(e) {
+            //console.log("hi");
+            //var value = $(e.currentTarget).val();
+            //this.model.save(id, value);
+        //}
+    });
+
+    hh.OptionView = Parse.View.extend({
+        model: null,
+        tagName: "option",
+        selected: false
+    });
+
+
 
     var addEventHandlers = function() {
-        // selects
-        $("select").on("change", function() {
-            var $select = $(this),
-            id = $select.attr("id"),
-            value = $select.val();
-
-            housePreferences.save(id, value);
-        });
-        // radios
         // areas
         $("area").on("mouseenter", function() {
             alert($(this).data("value"));
@@ -30,58 +123,26 @@ var hh = (function() {
 
     hh.init = function() {
         Parse.initialize("8De6SQMWtbOWrok19a0JA5I7SANT6FQP5a85WEy6", "bWAJd39x8c63Lv8xuKcafgu4TrbAqRqIr3Z1XayZ");
-
-        // Parse (Backbone) classes
-        HousePreferences = Parse.Object.extend({
-            className: "HousePreferences"
-        });
-        HousePreferencesView = Parse.View.extend({
-            model: null,
-            initialize: function() {
-                this.model.on("change", this.render);
-            },
-            render: function() {
-                var bedroomsSelector = "option[value='" + housePreferences.get("bedrooms") + "']",
-                    bathroomsSelector = "option[value='" + housePreferences.get("bathrooms") + "']",
-                    yardSelector = "input[type='radio'][name='yard'][value='" + housePreferences.get("yard") + "']",
-                    garageSelector = "input[type='radio'][name='garage'][value='" + housePreferences.get("garage") + "']",
-                    squarefeetSelector = "option[value='" + housePreferences.get("squarefeet") + "']",
-                    priceSelector = "option[value='" + housePreferences.get("price") + "']",
-
-                    neighborhoodsOptions = $("#neighborhoods").find("option"),
-                    neighborhoodsOptionsLength = neighborhoodsOptions.length,
-                    neighborhoods = housePreferences.get("neighborhoods"),
-                    option,
-                    optionValue;
-
-                $("#bedrooms").find(bedroomsSelector).attr("selected", "selected");
-                $("#bathrooms").find(bathroomsSelector).attr("selected", "selected");
-                $(yardSelector).attr("checked", true);
-                $(garageSelector).attr("checked", true);
-                $("#squarefeet").find(squarefeetSelector).attr("selected", "selected");
-                $("#price").find(priceSelector).attr("selected", "selected");
-
-                for (var i = 0; i < neighborhoodsOptionsLength; i++) {
-                    option = neighborhoodsOptions[i];
-                    optionValue = $(option).attr("value");
-                    if (neighborhoods.indexOf(optionValue) > -1) {
-                        $(option).attr("selected", "selected");
-                    }
-                }
-            }
-        });
-
-        housePreferencesQuery = new Parse.Query(HousePreferences);
-        housePreferencesQuery.get("xqDFn4ZkLt", {
+        var housePrefsQuery = new Parse.Query(hh.HousePreferences);
+        housePrefsQuery.get("xqDFn4ZkLt", {
             success: function(results) {
-                housePreferences = results;
-                housePreferencesView = new HousePreferencesView({
-                    model: housePreferences
+                housePrefsView = new hh.HousePreferencesView({
+                    model: results
                 });
-                housePreferences.trigger("change");
                 addEventHandlers();
             }
         });
+
+
+
+
+
+
+
+
+
+
+
 
         var TWO_PI = Math.PI * 2;
 
@@ -114,9 +175,7 @@ var hh = (function() {
 
         });
 
-
         render();
-
 
         function setStyle(){
             if (fillStyle){
