@@ -19,64 +19,47 @@ $(document).ready(function() {
 var hh = (function() {
     "use strict";
     var hh = {},
-        housePrefsView = null;
+    housePrefsView = null;
 
     hh.HousePreferences = Parse.Object.extend({
-        className: "HousePreferences"
+        className: "HousePreferences",
+        initialize: function() {
+            this.on("change:form", this.save);
+        }
     });
 
     hh.HousePreferencesView = Parse.View.extend({
         model: null,
 
-        neighborhoodsSelect: null,
-        neighborhoodsCollection: null,
+        events: {
+            "change select, change input": "changeForm",
+            "change input:radio": "changeForm"
+        },
 
         initialize: function() {
-           this.neighborhoodsSelect = new hh.SelectView({
-                el: "#neighborhoods"
-            });
-            this.neighborhoodsCollection = new hh.NeighborhoodsCollection();
-            var neighborhoodsOptions = this.neighborhoodsSelect.el.getElementsByTagName("option");
-            var neighborhoodsLength = neighborhoodsOptions.length;
-            var neighborhoodModel, neighborhoodOptionView;
-
-            for (var i = 0; i < neighborhoodsLength; i++) {
-                neighborhoodModel = new hh.NeighborhoodModel({
-                    id: neighborhoodsOptions[i].value
-                });
-                neighborhoodOptionView = new hh.OptionView({
-                    model: neighborhoodModel
-                });
-                this.neighborhoodsCollection.add(neighborhoodModel);
-            }
-
-           /*for (var i = 0; i < neighborhoodsOptionsLength; i++) {
-                option = neighborhoodsOptions[i];
-                optionValue = $(option).attr("value");
-                if (neighborhoods.indexOf(optionValue) > -1) {
-                    $(option).attr("selected", "selected");
-                }
-            }*/
-
             this.render();
         },
+
         render: function() {
-            var selectedNeighborhoods = this.model.get("neighborhoods");
-            // http://stackoverflow.com/questions/6442689/backbone-js-how-do-i-filter-a-collection-of-objects-by-an-array-of-model-ids
+            var selectedNeighborhoods = this.model.get("neighborhoods"),
+            neighborhoodsOptions = $("#neighborhoods").find("option"),
+            neighborhoodsOptionsLength = neighborhoodsOptions.length,
+            option,
+            optionValue,
+            bedroomsSelector = "option[value='" + this.model.get("bedrooms") + "']",
+            bathroomsSelector = "option[value='" + this.model.get("bathrooms") + "']",
+            yardSelector = "input[type='radio'][name='yard'][value='" + this.model.get("yard") + "']",
+            garageSelector = "input[type='radio'][name='garage'][value='" + this.model.get("garage") + "']",
+            squarefeetSelector = "option[value='" + this.model.get("squarefeet") + "']",
+            priceSelector = "option[value='" + this.model.get("price") + "']";
 
-            _.each(this.neighborhoodsCollection.models.filter(function(neighborhood) {
-                return _.contains(selectedNeighborhoods, neighborhood.id);
-            }), function(model) {
-                model.set("selected", true);
-            });
-
-            var bedroomsSelector = "option[value='" + this.model.get("bedrooms") + "']",
-                bathroomsSelector = "option[value='" + this.model.get("bathrooms") + "']",
-                yardSelector = "input[type='radio'][name='yard'][value='" + this.model.get("yard") + "']",
-                garageSelector = "input[type='radio'][name='garage'][value='" + this.model.get("garage") + "']",
-                squarefeetSelector = "option[value='" + this.model.get("squarefeet") + "']",
-                priceSelector = "option[value='" + this.model.get("price") + "']";
-
+            for (var i = 0; i < neighborhoodsOptionsLength; i++) {
+                option = neighborhoodsOptions[i];
+                optionValue = $(option).attr("value");
+                if (selectedNeighborhoods.indexOf(optionValue) > -1) {
+                    $(option).attr("selected", "selected");
+                }
+            }
             $("#bedrooms").find(bedroomsSelector).attr("selected", "selected");
             $("#bathrooms").find(bathroomsSelector).attr("selected", "selected");
             $(yardSelector).attr("checked", true);
@@ -84,35 +67,29 @@ var hh = (function() {
             $("#squarefeet").find(squarefeetSelector).attr("selected", "selected");
             $("#price").find(priceSelector).attr("selected", "selected");
 
-          }
+        },
+
+        changeForm: function(e) {
+            var modelUpdates = {},
+            el = e.target,
+            $el = $(el),
+            elNodeName = el.nodeName,
+            attrib = "",
+            val = "";
+
+            if (el.nodeName === "SELECT") {
+                attrib = $el.attr("id");
+                val = $el.val();
+            } else if (el.nodeName === "INPUT") {
+                attrib = $el.attr("name");
+                val = $("input:radio[name=" + attrib + "]:checked").val();
+            }
+
+            modelUpdates[attrib] = val;
+            this.model.set(modelUpdates);
+            this.model.trigger("change:form");
+        }
     });
-
-   hh.NeighborhoodModel = Parse.Object.extend({
-        className: "Neighborhood",
-        selected: false
-    });
-
-    hh.NeighborhoodsCollection = Parse.Collection.extend({
-        model: hh.Neighborhood
-    });
-
-    hh.SelectView = Parse.View.extend({
-        model: null,
-        tagName: "select",
-       //saveNeighborhoods: function(e) {
-            //console.log("hi");
-            //var value = $(e.currentTarget).val();
-            //this.model.save(id, value);
-        //}
-    });
-
-    hh.OptionView = Parse.View.extend({
-        model: null,
-        tagName: "option",
-        selected: false
-    });
-
-
 
     var addEventHandlers = function() {
         // areas
@@ -127,6 +104,7 @@ var hh = (function() {
         housePrefsQuery.get("xqDFn4ZkLt", {
             success: function(results) {
                 housePrefsView = new hh.HousePreferencesView({
+                    el: "form",
                     model: results
                 });
                 addEventHandlers();
@@ -229,8 +207,8 @@ var hh = (function() {
             });
         }
 
-        };
+    };
 
-        return hh;
+    return hh;
 })();
 
