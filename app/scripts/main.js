@@ -8,21 +8,10 @@ $(document).ready(function() {
 var hh = (function() {
     "use strict";
     var hh = {};
-    hh.housePrefsView = null;
 
-    var HousePreferences = Parse.Object.extend({
-        className: "HousePreferences",
-        initialize: function() {
-            this.on("change:form", this.save);
-        }
-    });
-
-    var HousePreferencesView = Parse.View.extend({
-        model: null,
+   var CanvasSubView = Parse.View.extend({
 
         events: {
-            "change select, change input": "changeForm",
-            "change input:radio": "changeForm",
             "mouseover area": "setCanvasAreaStyle",
             "mouseout area": "setCanvasAreaStyle",
             "click area": "setCanvasAreaStyle"
@@ -44,68 +33,25 @@ var hh = (function() {
             this.strokeStyleOver = "blue";
             this.strokeStyleOn = "red";
 
-           this.context.lineWidth = 2;
-
-            this.render();
-        },
+            this.context.lineWidth = 2;
+       },
 
         render: function() {
-            this.renderForm();
             this.clearCanvas();
             this.context.fillStyle = this.fillStyleOff;
             this.context.strokeStyle = this.strokeStyleOff;
-            this.renderCanvas();
-        },
+            var areasChildren = this.$areas.children(),
+            areasChildrenLength = areasChildren.length;
 
-        renderForm: function() {
-            var selectedNeighborhoods = this.model.get("neighborhoods"),
-            neighborhoodsOptions = $("#neighborhoods").find("option"),
-            neighborhoodsOptionsLength = neighborhoodsOptions.length,
-            option,
-            optionValue,
-            bedroomsSelector = "option[value='" + this.model.get("bedrooms") + "']",
-            bathroomsSelector = "option[value='" + this.model.get("bathrooms") + "']",
-            yardSelector = "input[type='radio'][name='yard'][value='" + this.model.get("yard") + "']",
-            garageSelector = "input[type='radio'][name='garage'][value='" + this.model.get("garage") + "']",
-            squarefeetSelector = "option[value='" + this.model.get("squarefeet") + "']",
-            priceSelector = "option[value='" + this.model.get("price") + "']";
-
-            for (var i = 0; i < neighborhoodsOptionsLength; i++) {
-                option = neighborhoodsOptions[i];
-                optionValue = $(option).attr("value");
-                if (selectedNeighborhoods.indexOf(optionValue) > -1) {
-                    $(option).attr("selected", "selected");
-                }
+            for (var i = 0; i < areasChildrenLength; i++) {
+                this.renderCanvasArea(areasChildren[i]);
             }
-            $("#bedrooms").find(bedroomsSelector).attr("selected", "selected");
-            $("#bathrooms").find(bathroomsSelector).attr("selected", "selected");
-            $(yardSelector).attr("checked", true);
-            $(garageSelector).attr("checked", true);
-            $("#squarefeet").find(squarefeetSelector).attr("selected", "selected");
-            $("#price").find(priceSelector).attr("selected", "selected");
-        },
-
-        changeForm: function(e) {
-            var modelUpdates = {},
-            el = e.target,
-            $el = $(el),
-            attrib = "",
-            val = "";
-
-            if (el.nodeName === "SELECT") {
-                attrib = $el.attr("id");
-                val = $el.val();
-            } else if (el.nodeName === "INPUT") {
-                attrib = $el.attr("name");
-                val = $("input:radio[name=" + attrib + "]:checked").val();
+            if (this.$el.hasClass("hide")) {
+                this.$el.removeClass("hide");
             }
+         },
 
-            modelUpdates[attrib] = val;
-            this.model.set(modelUpdates);
-            this.model.trigger("change:form");
-        },
-
-       fillAndStrokeCanvas: function(){
+        fillAndStrokeCanvas: function(){
             if (this.context.fillStyle) {
                 this.context.fill();
             }
@@ -140,41 +86,138 @@ var hh = (function() {
 
         setCanvasAreaStyle: function(e) {
             var eventType = e.originalEvent.type,
-                el = e.target,
-                $el = $(el);
-            console.log(eventType);
+            el = e.target,
+            $el = $(el);
+
             if (eventType === "mouseover") {
-                $el.data({
-                    fillStyle: this.fillStyleOver,
-                    strokeStyle: this.strokeStyleOver
-                });
+                if (!$el.data("fillStyle") || $el.data("fillStyle") == this.fillStyleOff) {
+                    $el.data({
+                        fillStyle: this.fillStyleOver,
+                        strokeStyle: this.strokeStyleOver
+                    });
+                }
             } else if (eventType === "mouseout") {
-                $el.data({
-                    fillStyle: this.fillStyleOff,
-                    strokeStyle: this.strokeStyleOff
-                });
-            }
+                if ($el.data("fillStyle") == this.fillStyleOn) {
+                    return;
+                } else {
+                    $el.data({
+                        fillStyle: this.fillStyleOff,
+                        strokeStyle: this.strokeStyleOff
+                    });
+                }
+            } else if (eventType === "click") {
+                e.preventDefault();
+               if ($el.data("fillStyle") == this.fillStyleOn) {
+                    $el.data({
+                        fillStyle: this.fillStyleOver,
+                        strokeStyle: this.strokeStyleOver
+                    });
+                } else {
+                    $el.data({
+                        fillStyle: this.fillStyleOn,
+                        strokeStyle: this.strokeStyleOn
+                    });
+                }
+              }
             this.renderCanvasArea(el);
-        },
-
-        renderCanvas: function() {
-            var areasChildren = this.$areas.children(),
-            areasChildrenLength = areasChildren.length;
-
-            for (var i = 0; i < areasChildrenLength; i++) {
-                this.renderCanvasArea(areasChildren[i]);
-            }
-
         }
-
     });
 
-   hh.init = function() {
+    var FormSubView = Parse.View.extend({
+        events: {
+            "change select, change input": "changeForm",
+            "change input:radio": "changeForm"
+        },
+
+        initialize: function() {
+            this.neighborhoodsOptions = $("#neighborhoods").find("option");
+            this.neighborhoodsOptionsLength = this.neighborhoodsOptions.length;
+         },
+
+        render: function() {
+            var selectedNeighborhoods = this.model.get("neighborhoods"),
+            option,
+            optionValue,
+            bedroomsSelector = "option[value='" + this.model.get("bedrooms") + "']",
+            bathroomsSelector = "option[value='" + this.model.get("bathrooms") + "']",
+            yardSelector = "input[type='radio'][name='yard'][value='" + this.model.get("yard") + "']",
+            garageSelector = "input[type='radio'][name='garage'][value='" + this.model.get("garage") + "']",
+            squarefeetSelector = "option[value='" + this.model.get("squarefeet") + "']",
+            priceSelector = "option[value='" + this.model.get("price") + "']";
+
+            for (var i = 0; i < this.neighborhoodsOptionsLength; i++) {
+                option = this.neighborhoodsOptions[i];
+                optionValue = $(option).attr("value");
+                if (selectedNeighborhoods.indexOf(optionValue) > -1) {
+                    $(option).attr("selected", "selected");
+                }
+            }
+            $("#bedrooms").find(bedroomsSelector).attr("selected", "selected");
+            $("#bathrooms").find(bathroomsSelector).attr("selected", "selected");
+            $(yardSelector).attr("checked", true);
+            $(garageSelector).attr("checked", true);
+            $("#squarefeet").find(squarefeetSelector).attr("selected", "selected");
+            $("#price").find(priceSelector).attr("selected", "selected");
+
+            if (this.$el.hasClass("hide")) {
+                this.$el.removeClass("hide");
+            }
+        },
+
+        changeForm: function(e) {
+            var modelUpdates = {},
+            el = e.target,
+            $el = $(el),
+            attrib = "",
+            val = "";
+
+            if (el.nodeName === "SELECT") {
+                attrib = $el.attr("id");
+                val = $el.val();
+            } else if (el.nodeName === "INPUT") {
+                attrib = $el.attr("name");
+                val = $("input:radio[name=" + attrib + "]:checked").val();
+            }
+
+            modelUpdates[attrib] = val;
+            this.model.set(modelUpdates);
+            this.model.trigger("change:form");
+        }
+    });
+
+    var AppView = Parse.View.extend({
+        initialize: function() {
+            var self = this;
+            this.canvas = new CanvasSubView({
+                el: "figure",
+                model: self.model
+            });
+            this.form = new FormSubView({
+                el: "form",
+                model: self.model
+            });
+            this.render();
+        },
+
+        render: function() {
+            this.canvas.render();
+            this.form.render();
+        }
+    });
+
+    var HousePreferences = Parse.Object.extend({
+        className: "HousePreferences",
+        initialize: function() {
+            this.on("change:form", this.save);
+        }
+    });
+
+     hh.init = function() {
         Parse.initialize("8De6SQMWtbOWrok19a0JA5I7SANT6FQP5a85WEy6", "bWAJd39x8c63Lv8xuKcafgu4TrbAqRqIr3Z1XayZ");
         var housePrefsQuery = new Parse.Query(HousePreferences);
         housePrefsQuery.get("xqDFn4ZkLt", {
             success: function(results) {
-                hh.housePrefsView = new HousePreferencesView({
+                hh.appView = new AppView({
                     el: "#container",
                     model: results
                 });
