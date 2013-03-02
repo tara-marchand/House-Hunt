@@ -1,12 +1,7 @@
 // http://zreference.com/image-map-canvas/
 
-$(document).ready(function() {
-    "use strict";
-    hh.init();
-});
-
 var hh = (function() {
-    "use strict";
+    //"use strict";
     var hh = {};
 
    var CanvasSubView = Parse.View.extend({
@@ -21,12 +16,13 @@ var hh = (function() {
             this.$map = $("#map");
             this.$areas = $("#areas");
 
-            this.$canvas = $("#canvas")[0];
-            this.$canvas.width = 800;
-            this.$canvas.height = 724;
+            this.$canvas = $("#canvas");
+            this.canvas = this.$canvas.get(0);
+            this.canvas.width = 800;
+            this.canvas.height = 724;
 
-            this.context = this.$canvas.getContext("2d");
-            this.fillStyleOff = "white";
+            this.context = this.canvas.getContext("2d");
+            this.fillStyleOff = "purple";
             this.fillStyleOver = "red";
             this.fillStyleOn = "blue";
             this.strokeStyleOff = "grey";
@@ -34,14 +30,15 @@ var hh = (function() {
             this.strokeStyleOn = "red";
 
             this.context.lineWidth = 2;
-       },
+        },
 
         render: function() {
             this.clearCanvas();
             this.context.fillStyle = this.fillStyleOff;
             this.context.strokeStyle = this.strokeStyleOff;
-            var areasChildren = this.$areas.children(),
-            areasChildrenLength = areasChildren.length;
+
+            var areasChildren = this.$map.children(),
+                areasChildrenLength = areasChildren.length;
 
             for (var i = 0; i < areasChildrenLength; i++) {
                 this.renderCanvasArea(areasChildren[i]);
@@ -51,37 +48,39 @@ var hh = (function() {
             }
          },
 
-        fillAndStrokeCanvas: function(){
-            if (this.context.fillStyle) {
-                this.context.fill();
-            }
-            if (this.context.strokeStyle) {
-                this.context.stroke();
-            }
-        },
-
         clearCanvas: function() {
             this.context.fillStyle = "transparent";
-            this.context.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         },
 
         renderCanvasArea: function(area) {
             var $area = $(area);
             var shape = $area.attr("shape");
             var coords = $area.attr("coords").split(",");
+            var leng = coords.length;
+            var coords1;
+            var coords2;
 
             this.context.fillStyle = ($area.data("fillStyle")) ? $area.data("fillStyle") : this.fillStyleOff;
-            this.context.strokeStyle = ($area.data("strokeStyle")) ? $area.data("strokeStyle") : this.strokeStyleOff;
-            this.context.lineWidth = ($area.data("lineWidth")) ? $area.data("lineWidth") : this.lineWidth;
+            //this.context.strokeStyle = ($area.data("strokeStyle")) ? $area.data("strokeStyle") : this.strokeStyleOff;
+            this.context.strokeStyle = "black";
+            //this.context.lineWidth = ($area.data("lineWidth")) ? $area.data("lineWidth") : this.lineWidth;
+            this.context.lineWidth = 2;
 
             this.context.beginPath();
-            var leng = coords.length;
-            this.context.moveTo(coords[0], coords[1]);
+            coords1 = parseInt(coords[0], 10);
+            coords2 = parseInt(coords[1], 10);
+            this.context.moveTo(coords1, coords2);
+            console.log("moveTo: " + coords1 + ", " + coords2);
             for (var j = 2; j < leng; j += 2){
-                this.context.lineTo(coords[j], coords[j+1]);
+                coords1 = parseInt(coords[j]);
+                coords2 = parseInt(coords[j + 1]);
+                this.context.lineTo(coords1, coords2);
+                console.log("j: " + j + ", lineTo: " + coords1 + ", "  + coords2);
             }
+            this.context.fill();
+            this.context.stroke();
             this.context.closePath();
-            this.fillAndStrokeCanvas();
         },
 
         setCanvasAreaStyle: function(e) {
@@ -90,14 +89,14 @@ var hh = (function() {
             $el = $(el);
 
             if (eventType === "mouseover") {
-                if (!$el.data("fillStyle") || $el.data("fillStyle") == this.fillStyleOff) {
+                if (!$el.data("fillStyle") || $el.data("fillStyle") === this.fillStyleOff) {
                     $el.data({
                         fillStyle: this.fillStyleOver,
                         strokeStyle: this.strokeStyleOver
                     });
                 }
             } else if (eventType === "mouseout") {
-                if ($el.data("fillStyle") == this.fillStyleOn) {
+                if ($el.data("fillStyle") === this.fillStyleOn) {
                     return;
                 } else {
                     $el.data({
@@ -107,7 +106,7 @@ var hh = (function() {
                 }
             } else if (eventType === "click") {
                 e.preventDefault();
-               if ($el.data("fillStyle") == this.fillStyleOn) {
+               if ($el.data("fillStyle") === this.fillStyleOn) {
                     $el.data({
                         fillStyle: this.fillStyleOver,
                         strokeStyle: this.strokeStyleOver
@@ -118,7 +117,7 @@ var hh = (function() {
                         strokeStyle: this.strokeStyleOn
                     });
                 }
-              }
+            }
             this.renderCanvasArea(el);
         }
     });
@@ -188,11 +187,11 @@ var hh = (function() {
     var AppView = Parse.View.extend({
         initialize: function() {
             var self = this;
-            this.canvas = new CanvasSubView({
+            this.canvasSubView = new CanvasSubView({
                 el: "figure",
                 model: self.model
             });
-            this.form = new FormSubView({
+            this.formSubView = new FormSubView({
                 el: "form",
                 model: self.model
             });
@@ -200,8 +199,8 @@ var hh = (function() {
         },
 
         render: function() {
-            this.canvas.render();
-            this.form.render();
+            this.canvasSubView.render();
+            this.formSubView.render();
         }
     });
 
@@ -228,4 +227,5 @@ var hh = (function() {
 
     return hh;
 })();
+
 
