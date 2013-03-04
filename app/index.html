@@ -14,7 +14,9 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <link rel="stylesheet" href="styles/main.css">
-        <script src="scripts/vendor/modernizr.min.js"></script>
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
     </head>
     <body>
         <div id="container">
@@ -263,8 +265,12 @@
             </form>
             </div>
 
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <!-- build:js scripts/vendor/jquery.min.js -->
+            <script src="components/jquery/jquery.min.js"></script>
+            <!-- endbuild -->
+            <!-- build:js scripts/vendor/underscore-min.js -->
             <script src="components/underscore/underscore-min.js"></script>
+            <!-- endbuild -->
             <script src="http://www.parsecdn.com/js/parse-1.2.1.js"></script>
             <script src="scripts/main.js"></script>
             <script>

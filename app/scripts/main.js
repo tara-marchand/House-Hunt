@@ -73,8 +73,8 @@ var hh = (function() {
             this.context.moveTo(coords1, coords2);
             console.log("moveTo: " + coords1 + ", " + coords2);
             for (var j = 2; j < leng; j += 2){
-                coords1 = parseInt(coords[j]);
-                coords2 = parseInt(coords[j + 1]);
+                coords1 = parseInt(coords[j], 10);
+                coords2 = parseInt(coords[j + 1], 10);
                 this.context.lineTo(coords1, coords2);
                 console.log("j: " + j + ", lineTo: " + coords1 + ", "  + coords2);
             }
